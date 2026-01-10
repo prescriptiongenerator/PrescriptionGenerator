@@ -1,0 +1,1662 @@
+/* ===================================================================
+   PRESCRIPTION GENERATOR WEB APPLICATION - STYLESHEET
+   Version: 12.3.1
+   Organized by: Component Categories
+   =================================================================== */
+
+/* ==================== SECTION 0: BASE & LAYOUT STYLES ==================== */
+body { 
+    font-family: 'Segoe UI', sans-serif; 
+    background: #f0f2f5; 
+    margin: 0; 
+    padding: 20px; 
+    display: flex; 
+    height: 100vh; 
+    box-sizing: border-box; 
+    overflow: hidden; 
+}
+
+.dashboard-container { 
+    display: flex; 
+    width: 100%; 
+    gap: 20px; 
+}
+
+.dashboard-title {
+    color: #0056b3;
+    margin: 0;
+}
+
+/* ==================== SECTION 1: BASE & LAYOUT STYLES ==================== */
+body { 
+    font-family: 'Segoe UI', sans-serif; 
+    background: #f0f2f5; 
+    margin: 0; 
+    padding: 20px; 
+    display: flex; 
+    height: 100vh; 
+    box-sizing: border-box; 
+    overflow: hidden; 
+}
+
+.dashboard-container { 
+    display: flex; 
+    width: 100%; 
+    gap: 20px; 
+}
+
+.dashboard-title {
+    color: #0056b3;
+    margin: 0;
+}
+
+/* ==================== SECTION 2: MAIN CONTENT AREAS ==================== */
+.main-form { 
+    flex: 3; 
+    background: white; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+    display: flex; 
+    flex-direction: column; 
+    padding: 20px; 
+    overflow-y: auto; 
+}
+
+.history-sidebar {
+    flex: 1.2;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* ==================== SECTION 3: HEADER & NAVIGATION ==================== */
+.header-row { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 5px; 
+}
+
+.header-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    min-width: 80px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#settingsBtn {
+    background: #6f42c1;
+    color: white;
+}
+
+#clearBtn {
+    background: #ff6b6b;
+    color: white;
+}
+
+#clearBtn:hover {
+    background: #dc3545;
+}
+
+#revokePremiumBtn {
+    background: #ffc107;
+    color: #212529;
+}
+
+#revokePremiumBtn:hover {
+    background: #e0a800;
+}
+
+/* ==================== SECTION 4: FORM ELEMENTS ==================== */
+.input-group { 
+    border: 1px solid #e0e0e0; 
+    padding: 10px; 
+    border-radius: 5px; 
+    margin-bottom: 10px;
+    min-height: 120px;
+}
+
+input, select, textarea { 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    padding: 6px; 
+    font-size: 13px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', sans-serif; 
+}
+
+textarea { 
+    resize: none; 
+    margin-bottom: 5px; 
+}
+
+.transaction-input {
+    border: 2px solid #0056b3;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+#histSearch { 
+    margin: 10px 0; 
+    padding: 8px 12px;
+    border: 2px solid #0056b3; 
+    border-radius: 20px; 
+    outline: none; 
+    width: 100%;
+    max-width: 440px;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ==================== SECTION 5: BUTTON STYLES ==================== */
+.btn-add { 
+    background: #28a745; 
+    color: white; 
+    border: none; 
+    padding: 8px 15px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    margin-top: 10px; 
+    font-weight: bold;
+    min-width: 150px;	
+}
+
+.btn-gen { 
+    background: #0056b3; 
+    color: white; 
+    border: none; 
+    padding: 10px; 
+    border-radius: 4px; 
+    font-size: 14px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+.btn-save { 
+    background: #28a745; 
+    color: white; 
+    border: none; 
+    padding: 10px; 
+    border-radius: 4px; 
+    font-size: 14px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    flex: 0 0 auto;
+}
+
+.btn-remove { 
+    color: #fff; 
+    border: none; 
+    background: #dc3545; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 10px; 
+    border-radius: 3px; 
+    padding: 2px 8px; 
+}
+
+.btn-edit { 
+    color: #fff; 
+    border: none; 
+    background: #0056b3;
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 10px; 
+    border-radius: 3px; 
+    padding: 4px 8px;
+    margin-right: 5px; 
+}
+
+.btn-edit:hover {
+    background: #004085;
+}
+
+.undo-delete-btn {
+    background: #6c757d !important;
+}
+
+.undo-delete-btn:hover {
+    background: #5a6268 !important;
+}
+
+.export-btn { 
+    background: #6c757d; 
+    color: white; 
+    border: none; 
+    padding: 8px 12px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 12px; 
+    font-weight: bold; 
+}
+
+.button-container {
+    display: flex !important;
+    gap: 20px !important;
+    margin-top: 10px !important;
+}
+
+.button-container button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 48px;
+    box-sizing: border-box;
+}
+
+.btn-unlock {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 15px;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.btn-unlock:hover {
+    background: linear-gradient(45deg, #218838, #1ca87a);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-download {
+    background: linear-gradient(45deg, #0056b3, #004085);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    transition: all 0.3s;
+    margin-top: 20px;
+}
+
+.btn-download:hover {
+    background: linear-gradient(45deg, #004085, #002752);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-import {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.btn-import:hover {
+    background: linear-gradient(45deg, #218838, #1ca87a);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-edit-patient {
+    background: #0056b3;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 9px;
+    width: 100%;
+}
+
+.btn-edit-prescription {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 9px;
+    width: 100%;
+}
+
+/* ==================== SECTION 6: HISTORY SECTION STYLES ==================== */
+#historyList { 
+    flex: 1; 
+    overflow-y: auto; 
+    list-style: none; 
+    padding: 0; 
+    margin-top: 10px; 
+}
+
+.history-item {
+    display: flex !important;
+    flex-direction: column !important; 
+    align-items: flex-start !important;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    gap: 15px;
+    border-bottom: 1px solid #e0e0e0 !important;
+    transition: background 0.2s ease;
+}
+
+.history-item:last-child {
+    border-bottom: none !important;
+}
+
+.history-item > div:first-child { 
+    display: flex !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
+    white-space: normal;
+    font-weight: bold;
+}
+
+.history-item:hover { 
+    background: #eef6ff; 
+}
+
+.history-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 95% !important;
+    gap: 17px;
+}
+
+.history-buttons button {
+    flex: 1;
+    height: 25px;
+}
+
+.edit-mode-indicator {
+    display: none;
+    background: #0056b3;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.edit-mode-patient {
+    background: #0056b3;
+}
+
+.edit-mode-prescription {
+    background: #28a745;
+}
+
+/* ==================== SECTION 7: PREMIUM & PRO BADGE STYLES ==================== */
+.pro-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
+    padding: 0 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+    background: red;
+    border-radius: 4px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: default;
+    margin-left: 10px;
+}
+
+.pro-badge::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(30deg);
+    transition: none;
+    animation: cyberScan 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes cyberScan {
+    0% { left: -60%; }
+    20% { left: 120%; }
+    100% { left: 120%; }
+}
+
+.premium-active {
+    background: linear-gradient(135deg, #FFD700, #FFA500) !important;
+    color: #000 !important;
+    font-weight: bold !important;
+}
+
+/* ==================== SECTION 8: MEDICATION TABLE STYLES ==================== */
+.med-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 5px; 
+}
+
+.med-table th { 
+    font-size: 11px; 
+    text-align: left; 
+    color: #666; 
+    padding-bottom: 5px; 
+    border-bottom: 1px solid #eee; 
+}
+
+/* ==================== SECTION 9: MODAL & DIALOG STYLES ==================== */
+.modal { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.5); 
+    z-index: 1000; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.modal-content { 
+    background: white; 
+    padding: 25px; 
+    border-radius: 8px; 
+    width: 90%; 
+    max-width: 700px; 
+    max-height: 90vh; 
+    overflow-y: auto; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
+}
+
+.modal-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px; 
+    border-bottom: 2px solid #0056b3; 
+    padding-bottom: 10px; 
+}
+
+.modal-title { 
+    color: white; 
+    margin: 0; 
+    font-size: 22px; 
+}
+
+.close-modal { 
+    background: none; 
+    border: none; 
+    font-size: 28px; 
+    cursor: pointer; 
+    color: #666; 
+    line-height: 1; 
+}
+
+/* ==================== SECTION 10: SETTINGS MODAL COMPONENTS ==================== */
+.settings-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+}
+
+.settings-section { 
+    margin-bottom: 20px; 
+    padding: 15px; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 5px; 
+}
+
+.settings-section h4 { 
+    color: #0056b3; 
+    margin: 0 0 15px 0; 
+    font-size: 16px; 
+}
+
+.settings-input { 
+    margin-bottom: 12px; 
+}
+
+.settings-input label { 
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: 500; 
+    color: #444; 
+    font-size: 13px; 
+}
+
+.logo-preview-container { 
+    display: flex; 
+    gap: 20px; 
+    align-items: center; 
+    margin-top: 15px; 
+}
+
+.logo-preview { 
+    width: 120px; 
+    height: 120px; 
+    border: 2px dashed #ccc; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: #f9f9f9; 
+    overflow: hidden; 
+}
+
+.logo-preview img { 
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
+}
+
+.file-input-wrapper { 
+    position: relative; 
+    overflow: hidden; 
+    display: inline-block; 
+    margin-top: 5px; 
+}
+
+.file-input-wrapper input[type=file] { 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    opacity: 0; 
+    width: 100%; 
+    height: 100%; 
+    cursor: pointer; 
+}
+
+.file-input-label { 
+    background: #0056b3; 
+    color: white; 
+    padding: 8px 15px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    display: inline-block; 
+    font-size: 12px; 
+}
+
+.modal-footer { 
+    margin-top: 20px; 
+    padding-top: 15px; 
+    border-top: 1px solid #eee; 
+    text-align: right; 
+}
+
+.btn-save-settings { 
+    background: #28a745; 
+    color: white; 
+    border: none; 
+    padding: 10px 25px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 14px; 
+}
+
+.btn-cancel { 
+    background: #6c757d; 
+    color: white; 
+    border: none; 
+    padding: 10px 25px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 14px; 
+    margin-right: 10px; 
+}
+
+.preview-label { 
+    font-size: 12px; 
+    color: #666; 
+    margin-bottom: 5px; 
+}
+
+/* ==================== SECTION 11: WATERMARK & SIGNATURE CONTROLS ==================== */
+.watermark-controls { 
+    display: flex; 
+    gap: 10px; 
+    align-items: center; 
+}
+
+.watermark-controls input[type="range"] { 
+    flex: 1; 
+}
+
+.watermark-value { 
+    min-width: 40px; 
+    text-align: center; 
+}
+
+.signature-preview { 
+    width: 200px; 
+    height: 80px; 
+    border: 1px solid #ccc; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: #f9f9f9; 
+    overflow: hidden; 
+}
+
+.signature-preview img { 
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
+}
+
+.signature-controls { 
+    display: flex; 
+    gap: 10px; 
+    align-items: center; 
+}
+
+.btn-remove-signature { 
+    background: #dc3545; 
+    color: white; 
+    border: none; 
+    padding: 8px 15px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 12px; 
+}
+
+.btn-remove-signature:disabled { 
+    background: #6c757d; 
+    cursor: not-allowed; 
+}
+
+.fontsize-controls { 
+    display: flex; 
+    gap: 10px; 
+    align-items: center; 
+}
+
+.fontsize-value { 
+    min-width: 40px; 
+    text-align: center; 
+}
+
+/* ==================== SECTION 12: PAYMENT & PREMIUM MODAL STYLES ==================== */
+.premium-payment-card {
+    background: linear-gradient(145deg, #ffffff, #f0f7ff);
+    border: 1px solid #d0e3ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 86, 179, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-payment-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: #0056b3;
+}
+
+.method-badge {
+    display: inline-block;
+    background: #eef6ff;
+    color: #0056b3;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.number-container {
+    background: #ffffff;
+    border: 2px dashed #0056b3;
+    color: #0056b3;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    margin: 10px 0;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.number-container:hover {
+    background: #0056b3;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.provider-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+}
+
+.payment-section {
+    background: #fff9e6;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.payment-info {
+    background: #f8f9fa;
+    border-left: 4px solid #28a745;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.status-message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+    display: none;
+}
+
+.status-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block !important;
+}
+
+.status-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block !important;
+}
+
+.status-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+    display: block !important;
+}
+
+.status-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.after-payment-box {
+    background-color: #f8f9fa;
+    border: 1.5px dashed #0056b3;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.after-payment-title {
+    color: #0056b3;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.after-payment-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13.5px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.after-payment-steps li {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.step-number {
+    background: #0056b3;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* ==================== SECTION 13: PACKAGE/PRODUCT CARD STYLES ==================== */
+.package-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.package-card:hover {
+    border-color: #28a745;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.package-card.popular {
+    border-color: #dc3545;
+}
+
+.package-card.best {
+    border-color: #f39c12;
+}
+
+.pkg-count {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.pkg-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0056b3;
+    margin: 5px 0;
+}
+
+.pkg-note {
+    font-size: 12px;
+    color: #666;
+}
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #dc3545;
+    color: white;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 20px;
+}
+
+.badge.gold {
+    background: #f39c12;
+}
+
+/* ==================== SECTION 14: IMPORT/EXPORT MODAL STYLES ==================== */
+.import-export-options {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.option-card {
+    background: white;
+    border: 2px solid #0056b3;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    cursor: default;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.option-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    color: #0056b3;
+}
+
+.option-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.option-desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.file-drop-area {
+    border: 3px dashed #0056b3;
+    border-radius: 10px;
+    padding: 40px 20px;
+    text-align: center;
+    background: #f8fbff;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.file-drop-area:hover {
+    background: #e8f4ff;
+    border-color: #28a745;
+}
+
+.file-drop-area.drag-over {
+    background: #d4edff;
+    border-color: #0056b3;
+}
+
+.file-drop-icon {
+    font-size: 64px;
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+
+.file-drop-text {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.file-drop-subtext {
+    font-size: 14px;
+    color: #666;
+}
+
+.uploaded-file-info {
+    background: #e8f5e9;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.file-icon {
+    font-size: 32px;
+    color: #28a745;
+}
+
+.file-details {
+    flex: 1;
+}
+
+.file-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.file-size {
+    font-size: 13px;
+    color: #666;
+}
+
+.export-info {
+    background: #fff3cd;
+    border: 2px dashed #ffc107;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.export-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0056b3;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.import-mode-container {
+    margin: 25px 0;
+    padding: 0;
+}
+
+.import-mode-title {
+    color: #0056b3;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.import-mode-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.import-mode-option {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.import-mode-option:hover {
+    border-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.import-mode-option.selected {
+    border-color: #28a745;
+    background: #f8fff9;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.15);
+}
+
+.import-mode-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.import-mode-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.import-mode-icon {
+    font-size: 24px;
+    color: #0056b3;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f7ff;
+    border-radius: 50%;
+}
+
+.import-mode-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.import-mode-desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    margin-left: 52px;
+}
+
+.import-mode-check {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #28a745;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.import-mode-option.selected .import-mode-check {
+    opacity: 1;
+    background: #28a745;
+}
+
+.import-mode-check::after {
+    content: "✓";
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.warning-note {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 5px;
+    padding: 12px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #856404;
+    text-align: center;
+}
+
+#alertCancelBtn.hidden {
+    display: none !important;
+}
+
+/* ==================== SECTION 15: UTILITY & MISC STYLES ==================== */
+.counter-display {
+    text-align: center;
+    margin: 10px 0;
+    padding: 8px;
+    background: #e9f7fe;
+    border-radius: 5px;
+    border: 1px solid #b6e0fe;
+    font-size: 14px;
+    color: #0056b3;
+}
+
+.author-link { 
+    color: #28a745; 
+    text-decoration: none; 
+    font-weight: 600; 
+    transition: color 0.3s; 
+}
+
+.author-link:hover { 
+    color: #218838; 
+    text-decoration: underline; 
+}
+
+.examination-heading { 
+    color: #0056b3; 
+    font-weight: bold; 
+    font-size: 11px; 
+    margin: 15px 0 5px 0; 
+}
+
+#prescriptionPreview{
+    border: 1px solid #e0e0e0; 
+    padding: 15px; 
+    border-radius: 5px; 
+    background: white; 
+    max-height: 200px; 
+    overflow-y: auto; 
+    font-size: 12px;
+}
+
+/* ==================== SECTION 16: PREVIOUS PRESCRIPTION STYLES ==================== */
+#previousPrescriptionsContainer {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+#previousPrescriptionsContainer label {
+    font-weight: 600;
+    color: #0056b3;
+    margin-right: 10px;
+}
+
+#previousPrescriptionsDropdown {
+    border: 1px solid #0056b3;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 12px;
+    color: #333;
+    background: white;
+    cursor: pointer;
+}
+
+#previousPrescriptionsDropdown:hover {
+    border-color: #003d82;
+}
+
+#previousPrescriptionsDropdown:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+}
+
+#addPrescriptionContainer {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    min-height: 150px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    margin: 10px 0;
+    margin: 20px 0;
+    background: #fafafa;
+}
+
+#addPrescriptionBtn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+}
+
+#addPrescriptionBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+    background: linear-gradient(135deg, #218838, #1ca87a);
+}
+
+#addPrescriptionBtn:active {
+    transform: translateY(0);
+}
+
+#addNewPrescriptionBtn{
+    font-size: 11px; 
+    background-color: #6c757d; 
+    cursor: not-allowed;
+}
+
+#medicineTableContainer {
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: row !important;
+}
+
+/* ==================== SECTION 17: MEDICINE DATABASE & AUTOCOMPLETE STYLES ==================== */
+.medicine-autocomplete {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23666" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 30px !important;
+    position: relative;
+    z-index: 100;
+}
+
+datalist {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+datalist option {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+datalist option:hover {
+    background-color: #f0f0f0;
+}
+
+.medicine-suggestion:hover {
+    background-color: #f0f0f0 !important;
+}
+
+input[list]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.medicine-autocomplete::-webkit-list-button {
+    display: none;
+}
+
+.database-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.stat-item {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 8px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #666;
+}
+
+.csv-sample-link {
+    display: inline-block;
+    background: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.csv-sample-link:hover {
+    background: #218838;
+    color: white;
+}
+
+/* ==================== SECTION 18: PLACEHOLDER & INPUT STYLES ==================== */
+::placeholder { 
+    color: #666; 
+    font-family: 'Segoe UI', sans-serif; 
+    opacity: 1; 
+}
+
+:-ms-input-placeholder { 
+    color: #666; 
+    font-family: 'Segoe UI', sans-serif; 
+}
+
+::-ms-input-placeholder { 
+    color: #666; 
+    font-family: 'Segoe UI', sans-serif; 
+}
+
+.med-input {
+    font-size: 12px;
+    padding: 4px 6px;
+}
+
+.centered-input {
+    text-align: center;
+}
+
+.med-table td {
+    padding: 4px;
+}
+
+/* ==================== SECTION 19: MEDICINE PRESET STYLES ==================== */
+.btn-preset {
+    background: #EBF4DD; 
+    color: white;
+    border: none;
+    min-height: 20px; padding: 0 7px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 11px;
+    transition: all 0.3s ease;
+    margin-top: 10px; 
+    flex: 0 0 auto;
+}
+
+.btn-preset:enabled {
+    background: #F11A7B;
+    cursor: pointer;
+}
+
+.btn-preset:enabled:hover {
+    background: #982176;
+    transform: translateY(-1px);
+}
+
+.btn-preset:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#loadPresetDropdown {
+    font-size: 11px;
+    padding: 0 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    align-content: right;
+    flex: 1;
+    min-width: 120px;
+}
+
+#loadPresetDropdown option[value=""] {
+    color: #666;
+}
+
+.preset-modal-content {
+    max-width: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.preset-modal-body {
+    padding: 30px;
+    text-align: center;
+}
+
+.preset-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #0056b3;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.preset-input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.preset-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.preset-list-item:last-child {
+    border-bottom: none;
+}
+
+.preset-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.preset-count {
+    font-size: 11px;
+    color: #666;
+    background: #f0f0f0;
+    padding: 2px 6px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.preset-remove-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    min-height: 20px; padding: 0 7px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.preset-remove-btn:hover {
+    background: #c82333;
+}
+
+.no-presets-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+    font-size: 12px;
+}
+
+.preset-management-section {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.preset-info {
+    font-size: 11px;
+    color: #666;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#settingsModal {
+    z-index: 1000;
+}
+
+#presetManagementModal {
+    z-index: 1100;
+}
+
+#customAlertModal {
+    z-index: 1200;
+}
+
+.btn-load-small {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.btn-load-small:hover {
+    background: #218838;
+}
+
+/* ==================== SECTION 20: RESPONSIVE DESIGN & ANIMATIONS ==================== */
+@media (max-width: 1200px) {
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+        overflow-y: auto;
+    }
+    
+    .main-form, .history-sidebar {
+        flex: none;
+        width: 100%;
+    }
+    
+    .history-sidebar {
+        margin-top: 20px;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-in-out;
+}
+
+input:disabled, select:disabled, textarea:disabled, button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

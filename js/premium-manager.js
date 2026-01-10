@@ -154,16 +154,7 @@ async function verifyUnlockCode() {
 
 async function checkPremiumStatus() {
     try {
-        const result = await StorageManager.get(['isPremium', 'expiryDate', 'prescriptionLimit', 'premiumType', 'prescriptionCount']);
-        
-        // Initialize counters if they don't exist
-        if (result.prescriptionCount === undefined) {
-            await StorageManager.set({ prescriptionCount: 0 });
-        }
-        if (result.prescriptionLimit === undefined) {
-            await StorageManager.set({ prescriptionLimit: 2 });
-        }
-        
+        const result = await StorageManager.get(['isPremium', 'expiryDate', 'prescriptionLimit', 'premiumType']);
         if (result.isPremium && result.expiryDate) {
             const now = new Date();
             const expiry = new Date(result.expiryDate);
@@ -174,8 +165,7 @@ async function checkPremiumStatus() {
                     isPremium: false,
                     premiumType: null,
                     expiryDate: null,
-                    prescriptionLimit: 2, // Default trial limit
-                    prescriptionCount: result.prescriptionCount || 0
+                    prescriptionLimit: 2 // Default trial limit
                 });
                 updatePremiumUI(false);
                 showCustomAlert('Subscription Expired', 'Your premium subscription has expired. Reverting to trial mode.', 'warning');
@@ -263,6 +253,31 @@ async function updateCounterDisplay() {
         console.error('Error updating counter display:', error);
     }
 }
+
+async function incrementPrescriptionCount() {
+    try {
+        const result = await StorageManager.get(['prescriptionCount', 'isPremium', 'prescriptionLimit']);
+        if (result.isPremium) {
+            return true;
+        }
+        
+        const currentCount = result.prescriptionCount || 0;
+        const limit = result.prescriptionLimit || 2;
+        const newCount = currentCount + 1;
+        
+        if (currentCount >= limit) {
+            return false;
+        }
+        
+        await StorageManager.set({ prescriptionCount: newCount });
+        updateCounterDisplay();
+        return newCount;
+    } catch (error) {
+        console.error('Error incrementing prescription count:', error);
+        return false;
+    }
+}
+
 async function checkPrescriptionLimit() {
     try {
         const result = await StorageManager.get(['isPremium', 'prescriptionCount', 'prescriptionLimit']);
@@ -337,32 +352,4 @@ function showUnlockSection() {
     document.getElementById('unlockSection').style.display = 'block';
     document.getElementById('showUnlockSection').style.display = 'none';
     document.getElementById('unlockCode').focus();
-
-}
-async function initializePrescriptionCounter() {
-    try {
-        const result = await StorageManager.get(['prescriptionCount', 'prescriptionLimit', 'isPremium']);
-        
-        // Initialize prescription count if it doesn't exist
-        if (result.prescriptionCount === undefined) {
-            await StorageManager.set({ prescriptionCount: 0 });
-        }
-        
-        // Initialize prescription limit if it doesn't exist
-        if (result.prescriptionLimit === undefined) {
-            await StorageManager.set({ prescriptionLimit: 2 });
-        }
-        
-        // If user is not premium and has used all free prescriptions
-        if (!result.isPremium && result.prescriptionCount >= result.prescriptionLimit) {
-            // Show upgrade button
-            const generateBtn = document.getElementById('generateBtn');
-            if (generateBtn) {
-                generateBtn.innerHTML = "🔒 Upgrade to Premium";
-                generateBtn.style.background = "#dc3545";
-            }
-        }
-    } catch (error) {
-        console.error('Error initializing prescription counter:', error);
-    }
 }

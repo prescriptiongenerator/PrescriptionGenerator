@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await resetForm();
         await renderHistory();
         await loadSettings();
+        await initializePrescriptionCounter();
         await updateCounterDisplay();
         setEditMode(null);
         await checkPremiumStatus();
@@ -243,4 +244,5 @@ function setupEventListeners() {
     });
     
     initImportExportModal();
+
 }

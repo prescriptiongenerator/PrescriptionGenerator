@@ -1,5 +1,3 @@
-// main.js - Core initialization and event setup (Web Compatible Version)
-
 // ====== CONSTANTS & GLOBALS ======
 const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzqerNLzZGi6xxcdKy1VBnsiHqNyaeZyquBW3aRP8oQiRdhfeOtVhZwADKXVFaAvCz_Og/exec';
 
@@ -22,17 +20,75 @@ let presetReject = null;
 // ====== INITIALIZATION ======
 document.addEventListener('DOMContentLoaded', async () => {
     try {
+        console.log('App initializing...');
+        
+        // FIRST: Load current settings to check what we have
+        const existingSettings = await StorageManager.get([
+            'prescriptionLimit', 
+            'prescriptionCount', 
+            'isPremium',
+            'premiumType',
+            'expiryDate',
+            'usedCodes'
+        ]);
+        
+        console.log('Existing settings:', existingSettings);
+        
+        // Check if this is a completely new user (all settings are null/undefined)
+        const isNewUser = (
+            existingSettings.prescriptionLimit === null && 
+            existingSettings.prescriptionLimit === undefined &&
+            existingSettings.prescriptionCount === null && 
+            existingSettings.prescriptionCount === undefined &&
+            existingSettings.isPremium === null && 
+            existingSettings.isPremium === undefined
+        );
+        
+        if (isNewUser) {
+            console.log('New user detected - setting up trial with 2 free prescriptions');
+            await StorageManager.set({
+                prescriptionLimit: 2,
+                prescriptionCount: 0,
+                isPremium: false,
+                premiumType: null,
+                expiryDate: null,
+                usedCodes: [],
+                premiumActivatedAt: null
+            });
+        } else {
+            console.log('Existing user detected - preserving settings');
+            // For existing users, ensure all required fields exist with proper defaults
+            const updatedSettings = {
+                prescriptionLimit: existingSettings.prescriptionLimit !== null && existingSettings.prescriptionLimit !== undefined ? existingSettings.prescriptionLimit : 2,
+                prescriptionCount: existingSettings.prescriptionCount !== null && existingSettings.prescriptionCount !== undefined ? existingSettings.prescriptionCount : 0,
+                isPremium: existingSettings.isPremium !== null && existingSettings.isPremium !== undefined ? existingSettings.isPremium : false,
+                premiumType: existingSettings.premiumType || null,
+                expiryDate: existingSettings.expiryDate || null,
+                usedCodes: existingSettings.usedCodes || [],
+                premiumActivatedAt: existingSettings.premiumActivatedAt || null
+            };
+            
+            // If user is premium but has a prescription limit, remove the limit
+            if (updatedSettings.isPremium && updatedSettings.prescriptionLimit !== null) {
+                console.log('Premium user detected - removing prescription limit');
+                updatedSettings.prescriptionLimit = null;
+            }
+            
+            await StorageManager.set(updatedSettings);
+        }
+        
+        // Now load everything else
         await resetForm();
         await renderHistory();
         await loadSettings();
-        await updateCounterDisplay();
-        setEditMode(null);
+        
+        // Check premium status BEFORE setting up UI
         await checkPremiumStatus();
+        await updateCounterDisplay();
+        
+        setEditMode(null);
         await initMedicineDatabase();
         await initMedicinePresets();
-
-        toggleMobileView();
-        window.addEventListener('resize', toggleMobileView);
         
         document.getElementById('pDate').value = new Date().toISOString().split('T')[0];
         
@@ -41,6 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.usedCodes = new Set(result.usedCodes || []);
         
         setupEventListeners();
+        
     } catch (error) {
         console.error('Initialization error:', error);
         showCustomAlert('Initialization Error', 'Failed to initialize the application. Please refresh the page.', 'error');
@@ -245,50 +302,5 @@ function setupEventListeners() {
         }
     });
     
-    initImportExportModal();
-}
-
-function isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-// Function to toggle mobile view
-function toggleMobileView() {
-    if (isMobileDevice() && window.innerWidth <= 768) {
-        // Hide desktop table, show mobile form
-        const desktopTable = document.querySelector('.med-table-container');
-        const mobileContainer = document.getElementById('medicineTableContainer');
-        
-        if (desktopTable && !desktopTable.classList.contains('mobile-view')) {
-            desktopTable.classList.add('mobile-view');
-            createMobileMedicineForm();
-        }
-    } else {
-        // Show desktop table, hide mobile form
-        const desktopTable = document.querySelector('.med-table-container');
-        if (desktopTable && desktopTable.classList.contains('mobile-view')) {
-            desktopTable.classList.remove('mobile-view');
-            removeMobileMedicineForm();
-        }
-    }
-}
-
-// Function to create mobile-friendly medicine form
-function createMobileMedicineForm() {
-    const container = document.getElementById('medicineTableContainer');
-    if (!container) return;
-    
-    const mobileForm = document.createElement('div');
-    mobileForm.className = 'mobile-medicine-form';
-    mobileForm.innerHTML = `
-        <div id="mobileMedBody"></div>
-        <button class="btn-add" onclick="addMobileMedicineRow()" style="width: 100%; margin: 10px 0;">
-            + Add Medicine
-        </button>
-    `;
-    
-    container.appendChild(mobileForm);
-    
-    // Convert existing rows to mobile format
-    convertToMobileRows();
+    initImportExportModal(); 
 }

@@ -1,5 +1,3 @@
-// main.js - Core initialization and event setup (Web Compatible Version)
-
 // ====== CONSTANTS & GLOBALS ======
 const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzqerNLzZGi6xxcdKy1VBnsiHqNyaeZyquBW3aRP8oQiRdhfeOtVhZwADKXVFaAvCz_Og/exec';
 
@@ -32,6 +30,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         await initMedicinePresets();
         
         document.getElementById('pDate').value = new Date().toISOString().split('T')[0];
+		
+		const trialCheck = await StorageManager.get(['prescriptionLimit']);
+        if (trialCheck.prescriptionLimit === null) {
+            await StorageManager.set({
+                prescriptionLimit: 2,
+                prescriptionCount: 0,
+                isPremium: false
+            });
+        }
+
+        await updateCounterDisplay();
+        await checkPremiumStatus();
         
         // Load used codes from storage
         const result = await StorageManager.get(['usedCodes']);

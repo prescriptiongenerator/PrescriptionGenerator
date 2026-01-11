@@ -1,3 +1,5 @@
+// main.js - Core initialization and event setup (Web Compatible Version)
+
 // ====== CONSTANTS & GLOBALS ======
 const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzqerNLzZGi6xxcdKy1VBnsiHqNyaeZyquBW3aRP8oQiRdhfeOtVhZwADKXVFaAvCz_Og/exec';
 
@@ -28,20 +30,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         await checkPremiumStatus();
         await initMedicineDatabase();
         await initMedicinePresets();
+
+        toggleMobileView();
+        window.addEventListener('resize', toggleMobileView);
         
         document.getElementById('pDate').value = new Date().toISOString().split('T')[0];
-		
-		const trialCheck = await StorageManager.get(['prescriptionLimit']);
-        if (trialCheck.prescriptionLimit === null) {
-            await StorageManager.set({
-                prescriptionLimit: 2,
-                prescriptionCount: 0,
-                isPremium: false
-            });
-        }
-
-        await updateCounterDisplay();
-        await checkPremiumStatus();
         
         // Load used codes from storage
         const result = await StorageManager.get(['usedCodes']);
@@ -253,4 +246,49 @@ function setupEventListeners() {
     });
     
     initImportExportModal();
+}
+
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Function to toggle mobile view
+function toggleMobileView() {
+    if (isMobileDevice() && window.innerWidth <= 768) {
+        // Hide desktop table, show mobile form
+        const desktopTable = document.querySelector('.med-table-container');
+        const mobileContainer = document.getElementById('medicineTableContainer');
+        
+        if (desktopTable && !desktopTable.classList.contains('mobile-view')) {
+            desktopTable.classList.add('mobile-view');
+            createMobileMedicineForm();
+        }
+    } else {
+        // Show desktop table, hide mobile form
+        const desktopTable = document.querySelector('.med-table-container');
+        if (desktopTable && desktopTable.classList.contains('mobile-view')) {
+            desktopTable.classList.remove('mobile-view');
+            removeMobileMedicineForm();
+        }
+    }
+}
+
+// Function to create mobile-friendly medicine form
+function createMobileMedicineForm() {
+    const container = document.getElementById('medicineTableContainer');
+    if (!container) return;
+    
+    const mobileForm = document.createElement('div');
+    mobileForm.className = 'mobile-medicine-form';
+    mobileForm.innerHTML = `
+        <div id="mobileMedBody"></div>
+        <button class="btn-add" onclick="addMobileMedicineRow()" style="width: 100%; margin: 10px 0;">
+            + Add Medicine
+        </button>
+    `;
+    
+    container.appendChild(mobileForm);
+    
+    // Convert existing rows to mobile format
+    convertToMobileRows();
 }

@@ -23,7 +23,7 @@ body {
 }
 
 .dashboard-title {
-    font-size: 18px;
+    font-size: 18px; 
     color: #0056b3;
     margin: 0;
 }
@@ -396,13 +396,16 @@ textarea {
 .history-buttons {
     display: flex !important;
     flex-direction: row !important;
-    width: 95% !important;
-    gap: 17px;
+    width: 100% !important;  /* <-- Changed to 100% */
+    justify-content: space-between;  /* <-- Added to distribute buttons evenly */
+    gap: 0;  /* <-- Reset gap since we're using space-between */
 }
 
 .history-buttons button {
-    flex: 1;
+    flex: 0 0 auto;  /* <-- Don't allow buttons to grow/shrink */
     height: 25px;
+    width: calc(33.33% - 5px);  /* <-- Each button takes 1/3 of space minus small gap */
+    margin: 0 2.5px;  /* <-- Small margin between buttons */
 }
 
 .edit-mode-indicator {
@@ -1661,4 +1664,3 @@ input:disabled, select:disabled, textarea:disabled, button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
-

@@ -35,7 +35,7 @@ async function verifyUnlockCode() {
                     premiumType: "Lifetime",
                     expiryDate: null,
                     prescriptionCount: 0,
-                    prescriptionLimit: null,
+                    prescriptionLimit: null, // null means unlimited for premium users
                     usedCodes: [code],
                     premiumActivatedAt: new Date().toISOString()
                 });
@@ -66,7 +66,7 @@ async function verifyUnlockCode() {
                     premiumType: result.type,
                     expiryDate: expiry.toISOString(),
                     prescriptionCount: 0,
-                    prescriptionLimit: null,
+                    prescriptionLimit: null, // null means unlimited for premium users
                     usedCodes: [code],
                     premiumActivatedAt: new Date().toISOString()
                 });
@@ -90,14 +90,24 @@ async function verifyUnlockCode() {
                 const match = result.type.match(/\d+/);
                 const additionalPrescriptions = match ? parseInt(match[0]) : 10;
                 
-                const storageResult = await StorageManager.get(['prescriptionCount', 'prescriptionLimit']);
+                const storageResult = await StorageManager.get(['prescriptionCount', 'prescriptionLimit', 'isPremium']);
                 const currentCount = storageResult.prescriptionCount || 0;
                 const currentLimit = storageResult.prescriptionLimit || 2;
+                
+                // IMPORTANT: If user is already premium, don't extend trial
+                if (storageResult.isPremium) {
+                    unlockStatus.textContent = "❌ You are already a premium user. Trial extensions are not applicable.";
+                    unlockStatus.className = "status-message status-error";
+                    verifyBtn.disabled = false;
+                    verifyBtn.innerHTML = "Verify & Unlock";
+                    return;
+                }
+                
                 const newLimit = currentLimit + additionalPrescriptions;
                 
                 await StorageManager.set({
                     isPremium: false,
-                    prescriptionCount: currentCount,
+                    prescriptionCount: currentCount, // Keep current count
                     prescriptionLimit: newLimit,
                     usedCodes: [code],
                     trialActivatedAt: new Date().toISOString()
@@ -120,7 +130,7 @@ async function verifyUnlockCode() {
                     isPremium: true,
                     premiumType: result.type,
                     prescriptionCount: 0,
-                    prescriptionLimit: null,
+                    prescriptionLimit: null, // null means unlimited for premium users
                     usedCodes: [code],
                     premiumActivatedAt: new Date().toISOString()
                 });
@@ -154,24 +164,40 @@ async function verifyUnlockCode() {
 
 async function checkPremiumStatus() {
     try {
-        const result = await StorageManager.get(['isPremium', 'expiryDate', 'prescriptionLimit', 'premiumType']);
+        const result = await StorageManager.get(['isPremium', 'expiryDate', 'prescriptionLimit', 'premiumType', 'prescriptionCount']);
+        
+        console.log('checkPremiumStatus - Current state:', result);
+        
+        // Ensure premium users have null prescriptionLimit (unlimited)
+        if (result.isPremium && result.prescriptionLimit !== null) {
+            console.log('Fixing: Premium user should have null prescriptionLimit');
+            await StorageManager.set({
+                prescriptionLimit: null
+            });
+        }
+        
+        // Check for expired subscriptions (only if they have an expiry date)
         if (result.isPremium && result.expiryDate) {
             const now = new Date();
             const expiry = new Date(result.expiryDate);
 
             if (now > expiry) {
                 // SUBSCRIPTION EXPIRED: Revert to trial
+                console.log('Premium subscription expired, reverting to trial');
                 await StorageManager.set({
                     isPremium: false,
                     premiumType: null,
                     expiryDate: null,
-                    prescriptionLimit: 2 // Default trial limit
+                    prescriptionLimit: 2, // Default trial limit
+                    prescriptionCount: 0  // Reset count
                 });
+                
                 updatePremiumUI(false);
                 showCustomAlert('Subscription Expired', 'Your premium subscription has expired. Reverting to trial mode.', 'warning');
                 return;
             }
         }
+        
         updatePremiumUI(result.isPremium || false, result.premiumType);
         updateCounterDisplay();
     } catch (error) {
@@ -183,7 +209,7 @@ async function updateCounterDisplay() {
     try {
         const result = await StorageManager.get(['isPremium', 'prescriptionCount', 'prescriptionLimit', 'premiumType', 'expiryDate']);
         const count = result.prescriptionCount || 0;
-        const limit = result.prescriptionLimit !== undefined ? result.prescriptionLimit : 2;
+        const limit = (result.prescriptionLimit !== null && result.prescriptionLimit !== undefined) ? result.prescriptionLimit : 2;
         const remaining = limit - count;
         const isPremium = result.isPremium || false;
 
@@ -200,6 +226,8 @@ async function updateCounterDisplay() {
         } else {
             dashboardTitle.textContent = 'Prescription Generator Trial';
         }
+
+        console.log('Counter display - Premium:', isPremium, 'Limit:', limit, 'Count:', count, 'Remaining:', remaining);
 
         if (isPremium) {
             const premiumType = result.premiumType || "Premium";
@@ -224,8 +252,10 @@ async function updateCounterDisplay() {
             generateBtn.innerHTML = "Generate & Print Prescription";
             generateBtn.style.background = "#0056b3";
             generateBtn.disabled = false;
+            generateBtn.style.cursor = "pointer";
             saveBtn.style.display = 'block';
             saveBtn.disabled = false;
+            saveBtn.style.cursor = "pointer";
         } else {
             // Free Trial / Count-based logic
             if (limit === 0 || remaining <= 0) {
@@ -236,16 +266,21 @@ async function updateCounterDisplay() {
                 `;
                 generateBtn.innerHTML = "🔒 Upgrade to Premium";
                 generateBtn.style.background = "#dc3545";
+                generateBtn.style.cursor = "pointer";
                 saveBtn.style.display = 'none';
             } else {
                 counterDisplay.innerHTML = `
                     Prescriptions Remaining: <span id="remainingCount" style="font-weight:bold;">${remaining}</span>
                     <br>
-                    <small style="color: #666;">${count} used</small>
+                    <small style="color: #666;">${count} used of ${limit} total</small>
                 `;
                 generateBtn.innerHTML = "Generate & Print Prescription";
                 generateBtn.style.background = "#0056b3";
+                generateBtn.disabled = false;
+                generateBtn.style.cursor = "pointer";
                 saveBtn.style.display = 'block';
+                saveBtn.disabled = false;
+                saveBtn.style.cursor = "pointer";
             }
         }
         counterDisplay.style.display = 'block';
@@ -258,7 +293,7 @@ async function incrementPrescriptionCount() {
     try {
         const result = await StorageManager.get(['prescriptionCount', 'isPremium', 'prescriptionLimit']);
         if (result.isPremium) {
-            return true;
+            return true; // Premium users have unlimited
         }
         
         const currentCount = result.prescriptionCount || 0;
@@ -282,11 +317,11 @@ async function checkPrescriptionLimit() {
     try {
         const result = await StorageManager.get(['isPremium', 'prescriptionCount', 'prescriptionLimit']);
         if (result.isPremium) {
-            return true;
+            return true; // Premium users always have access
         }
         
         const count = result.prescriptionCount || 0;
-        const limit = result.prescriptionLimit !== undefined ? result.prescriptionLimit : 2;
+        const limit = (result.prescriptionLimit !== null && result.prescriptionLimit !== undefined) ? result.prescriptionLimit : 2;
         
         if (limit === 0) {
             return false;
@@ -316,6 +351,9 @@ function openPaymentModal() {
         verifyBtn.disabled = false;
         verifyBtn.innerHTML = '✅ Verify & Unlock';
     }
+    
+    // Update the modal to show correct status
+    checkPremiumStatus();
 }
 
 function updatePremiumUI(isPremium, type = "Lifetime") {
@@ -332,7 +370,7 @@ function updatePremiumUI(isPremium, type = "Lifetime") {
     } else {
         // Check if trial is extended
         StorageManager.get(['prescriptionLimit']).then(result => {
-            const limit = result.prescriptionLimit !== undefined ? result.prescriptionLimit : 2;
+            const limit = (result.prescriptionLimit !== null && result.prescriptionLimit !== undefined) ? result.prescriptionLimit : 2;
             if (limit > 2) {
                 dashboardTitle.textContent = 'Prescription Generator';
             } else {
@@ -352,4 +390,21 @@ function showUnlockSection() {
     document.getElementById('unlockSection').style.display = 'block';
     document.getElementById('showUnlockSection').style.display = 'none';
     document.getElementById('unlockCode').focus();
+}
+
+// Helper function to reset trial for debugging
+async function resetTrialForTesting() {
+    if (confirm("Reset to initial trial state (2 free prescriptions)?")) {
+        await StorageManager.set({
+            prescriptionLimit: 2,
+            prescriptionCount: 0,
+            isPremium: false,
+            premiumType: null,
+            expiryDate: null,
+            usedCodes: []
+        });
+        await checkPremiumStatus();
+        await updateCounterDisplay();
+        showSuccessMessage('Trial Reset', 'Reset to initial trial state with 2 free prescriptions.');
+    }
 }

@@ -1664,3 +1664,642 @@ input:disabled, select:disabled, textarea:disabled, button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+/* ===================================================================
+   MOBILE RESPONSIVE STYLES
+   =================================================================== */
+
+/* ==================== SECTION 21: MOBILE SPECIFIC STYLES ==================== */
+@media (max-width: 768px) {
+    /* Body & Container Adjustments */
+    body {
+        padding: 10px;
+        height: auto;
+        overflow-y: auto;
+    }
+    
+    .dashboard-container {
+        flex-direction: column;
+        gap: 10px;
+        min-height: 100vh;
+    }
+    
+    .main-form {
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        flex: none;
+    }
+    
+    /* Mobile Navigation */
+    .mobile-nav-toggle {
+        display: flex !important;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        background: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .mobile-nav-toggle button {
+        flex: 1;
+        margin: 0 5px;
+        padding: 10px;
+        background: #0056b3;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+    
+    /* Header Adjustments */
+    .header-container {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px;
+    }
+    
+    .dashboard-title {
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    /* Patient Information Form */
+    .mobile-header-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .mobile-patient-row {
+        display: flex;
+        gap: 8px;
+    }
+    
+    .mobile-patient-details {
+        display: flex;
+        gap: 8px;
+        flex: 1;
+    }
+    
+    .mobile-contact-row {
+        display: flex;
+        gap: 8px;
+    }
+    
+    .mobile-input {
+        padding: 8px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .mobile-select {
+        padding: 8px;
+        font-size: 14px;
+        min-width: 60px;
+    }
+    
+    .age-input {
+        max-width: 80px;
+    }
+    
+    .mobile-date {
+        flex: 1;
+    }
+    
+    /* Clinical & Medical Section */
+    .clinical-medical-section {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .clinical-column,
+    .medication-column {
+        flex: none;
+        width: 100%;
+    }
+    
+    .mobile-input-group {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .mobile-label {
+        font-size: 12px !important;
+        margin-bottom: 5px;
+        display: block;
+    }
+    
+    .mobile-textarea {
+        font-size: 14px;
+        padding: 8px;
+        resize: vertical;
+    }
+    
+    .vitals-container {
+        display: flex;
+        gap: 5px;
+        margin-top: 10px;
+    }
+    
+    .vital-input {
+        flex: 1;
+        padding: 8px;
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    /* Medicine Table */
+    .mobile-med-table {
+        font-size: 12px;
+    }
+    
+    .mobile-med-table th {
+        padding: 4px 2px;
+        font-size: 10px;
+        white-space: nowrap;
+    }
+    
+    .mobile-med-table td {
+        padding: 4px 2px;
+    }
+    
+    .table-scroll-container {
+        overflow-x: auto;
+        margin-bottom: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+    }
+    
+    .mobile-med-table th:nth-child(1) { min-width: 150px; }
+    .mobile-med-table th:nth-child(2) { min-width: 40px; }
+    .mobile-med-table th:nth-child(3) { min-width: 50px; }
+    .mobile-med-table th:nth-child(4) { min-width: 70px; }
+    .mobile-med-table th:nth-child(5) { min-width: 60px; }
+    .mobile-med-table th:nth-child(6) { min-width: 50px; }
+    .mobile-med-table th:nth-child(7) { min-width: 80px; }
+    .mobile-med-table th:nth-child(8) { min-width: 100px; }
+    .mobile-med-table th:nth-child(9) { min-width: 40px; }
+    
+    /* Medicine Controls */
+    .mobile-medicine-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .preset-controls {
+        display: flex;
+        gap: 5px;
+        width: 100%;
+    }
+    
+    .mobile-btn-sm {
+        padding: 6px 12px;
+        font-size: 12px;
+        min-width: auto;
+    }
+    
+    .mobile-btn-add {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    /* Button Container */
+    .mobile-button-container {
+        flex-direction: column;
+        gap: 10px !important;
+    }
+    
+    .mobile-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        margin: 0 !important;
+    }
+    
+    /* History Sidebar */
+    .mobile-history-sidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        background: white;
+        padding: 15px;
+        display: none;
+        flex-direction: column;
+    }
+    
+    .mobile-history-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .mobile-history-buttons {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .mobile-search {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    /* Modal Adjustments */
+    .mobile-modal .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        padding: 15px;
+        margin: 10px;
+    }
+    
+    .mobile-modal-content {
+        overflow-y: auto;
+    }
+    
+    .mobile-modal-header {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .mobile-close-modal {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+    }
+    
+    .mobile-settings-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .mobile-settings-section {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .mobile-modal-body {
+        padding: 15px;
+    }
+    
+    .mobile-modal-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .mobile-modal-footer button {
+        width: 100%;
+        margin: 5px 0 !important;
+    }
+    
+    /* Settings Specific */
+    .mobile-file-input {
+        width: 100%;
+    }
+    
+    .mobile-logo-preview {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .mobile-logo-preview .logo-preview {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .mobile-stats {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .mobile-stats div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+    
+    .mobile-button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+    }
+    
+    /* Payment Modal Specific */
+    .mobile-packages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .mobile-package-card {
+        padding: 12px;
+    }
+    
+    .mobile-section-title {
+        font-size: 16px;
+        text-align: center;
+        margin: 15px 0;
+    }
+    
+    .mobile-premium-card {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .mobile-premium-price {
+        font-size: 24px;
+        margin: 10px 0;
+    }
+    
+    .mobile-payment-card {
+        padding: 15px;
+    }
+    
+    .mobile-payment-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .mobile-number {
+        font-size: 18px;
+        padding: 10px;
+    }
+    
+    .mobile-providers {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .mobile-steps-box {
+        padding: 12px;
+        margin: 15px 0;
+    }
+    
+    .mobile-steps li {
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+    
+    .mobile-unlock-section {
+        margin: 15px 0;
+    }
+    
+    .mobile-support-info {
+        font-size: 11px;
+        text-align: center;
+        margin-top: 15px;
+    }
+    
+    /* Import/Export Modal */
+    .mobile-tabs {
+        display: flex;
+        border-bottom: 2px solid #e0e0e0;
+        margin-bottom: 15px;
+    }
+    
+    .mobile-tab {
+        flex: 1;
+        padding: 10px;
+        border-radius: 0;
+        background: transparent;
+        color: #666;
+    }
+    
+    .mobile-tab.active {
+        border-bottom: 3px solid #0056b3;
+        color: #0056b3;
+    }
+    
+    .mobile-info {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .mobile-file-drop {
+        padding: 30px 15px;
+        margin: 15px 0;
+    }
+    
+    .mobile-file-info {
+        padding: 12px;
+    }
+    
+    .mobile-import-modes {
+        margin: 15px 0;
+    }
+    
+    /* History List */
+    #historyList {
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+    
+    .history-item {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .history-buttons {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+    }
+    
+    .history-buttons button {
+        flex: 1;
+        margin: 0 2px;
+        padding: 6px 4px;
+        font-size: 11px;
+    }
+    
+    /* Counter Display */
+    .counter-display {
+        font-size: 13px;
+        padding: 8px;
+        margin: 10px 0;
+    }
+    
+    /* Mobile Warning */
+    .mobile-warning {
+        font-size: 12px;
+        padding: 8px;
+        margin: 8px 0;
+    }
+    
+    /* Previous Prescription */
+    .mobile-prescription-select {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    .mobile-prescription-select select {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    
+    .main-form,
+    .history-sidebar {
+        width: 100%;
+    }
+    
+    .history-sidebar {
+        margin-top: 20px;
+    }
+    
+    .clinical-medical-section {
+        gap: 15px;
+    }
+    
+    .clinical-column {
+        flex: 1;
+    }
+    
+    .medication-column {
+        flex: 2;
+    }
+    
+    .table-scroll-container {
+        overflow-x: auto;
+    }
+    
+    .mobile-nav-toggle {
+        display: none !important;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .mobile-packages-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mobile-patient-row,
+    .mobile-contact-row {
+        flex-direction: column;
+    }
+    
+    .mobile-patient-details {
+        width: 100%;
+    }
+    
+    .vitals-container {
+        flex-direction: column;
+    }
+    
+    .mobile-modal .modal-content {
+        width: 98%;
+        padding: 10px;
+    }
+    
+    .mobile-med-table th {
+        font-size: 9px;
+        padding: 3px 1px;
+    }
+    
+    .mobile-med-table td {
+        font-size: 11px;
+        padding: 3px 1px;
+    }
+}
+
+/* Orientation Specific */
+@media (max-width: 768px) and (orientation: landscape) {
+    .dashboard-container {
+        flex-direction: row;
+    }
+    
+    .main-form {
+        flex: 2;
+    }
+    
+    .mobile-history-sidebar {
+        flex: 1;
+        position: relative;
+        display: flex;
+    }
+    
+    .mobile-nav-toggle {
+        display: none !important;
+    }
+}
+
+/* Prevent zoom on input focus iOS */
+@media screen and (max-width: 768px) {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important; /* Prevents iOS zoom */
+    }
+}
+
+/* Touch-friendly elements */
+@media (max-width: 768px) {
+    button,
+    input[type="button"],
+    input[type="submit"],
+    select {
+        min-height: 44px; /* Apple recommends 44px minimum touch target */
+    }
+    
+    .med-table td button {
+        min-height: 30px;
+        padding: 6px 10px;
+    }
+}
+
+/* Smooth transitions */
+.mobile-history-sidebar,
+.mobile-modal {
+    transition: all 0.3s ease;
+}
+
+/* Hide scrollbar for cleaner look on mobile */
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 2px;
+    }
+}
+
+/* Print specific styles for mobile */
+@media print {
+    .mobile-nav-toggle,
+    .mobile-history-sidebar,
+    button {
+        display: none !important;
+    }
+    
+    .main-form {
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}

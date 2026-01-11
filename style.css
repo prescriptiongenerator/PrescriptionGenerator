@@ -23,6 +23,7 @@ body {
 }
 
 .dashboard-title {
+    font-size: 18px;
     color: #0056b3;
     margin: 0;
 }
@@ -1660,3 +1661,4 @@ input:disabled, select:disabled, textarea:disabled, button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
+

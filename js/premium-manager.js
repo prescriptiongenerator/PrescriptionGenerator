@@ -183,7 +183,7 @@ async function updateCounterDisplay() {
     try {
         const result = await StorageManager.get(['isPremium', 'prescriptionCount', 'prescriptionLimit', 'premiumType', 'expiryDate']);
         const count = result.prescriptionCount || 0;
-        const limit = (result.prescriptionLimit !== null && result.prescriptionLimit !== undefined) ? result.prescriptionLimit : 2;
+        const limit = result.prescriptionLimit !== undefined ? result.prescriptionLimit : 2;
         const remaining = limit - count;
         const isPremium = result.isPremium || false;
 
@@ -286,7 +286,7 @@ async function checkPrescriptionLimit() {
         }
         
         const count = result.prescriptionCount || 0;
-        const limit = (result.prescriptionLimit !== null && result.prescriptionLimit !== undefined) ? result.prescriptionLimit : 2;
+        const limit = result.prescriptionLimit !== undefined ? result.prescriptionLimit : 2;
         
         if (limit === 0) {
             return false;
@@ -332,7 +332,7 @@ function updatePremiumUI(isPremium, type = "Lifetime") {
     } else {
         // Check if trial is extended
         StorageManager.get(['prescriptionLimit']).then(result => {
-            const limit = (result.prescriptionLimit !== null && result.prescriptionLimit !== undefined) ? result.prescriptionLimit : 2;
+            const limit = result.prescriptionLimit !== undefined ? result.prescriptionLimit : 2;
             if (limit > 2) {
                 dashboardTitle.textContent = 'Prescription Generator';
             } else {

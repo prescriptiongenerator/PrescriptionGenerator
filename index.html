@@ -102,13 +102,13 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 200px;">Name</th>
-                                        <th style="width: 55px;">Qty</th>
-                                        <th style="width: 80px;">Unit</th>
-                                        <th style="width: 110px;">Dose</th>
-                                        <th style="width: 90px;">Freq</th>
-                                        <th style="width: 65px;">Days</th>
-                                        <th style="width: 150px;">Meal</th>
-                                        <th style="width: 150px;">Note</th>
+                                        <th style="width: 55px; text-align: center;">Qty</th>
+                                        <th style="width: 80px; text-align: center;">Unit</th>
+                                        <th style="width: 110px; text-align: center;">Dose</th>
+                                        <th style="width: 90px; text-align: center;">Freq</th>
+                                        <th style="width: 65px; text-align: center;">Duration</th>
+                                        <th style="width: 150px; text-align: center;">Relation to Meals</th>
+                                        <th style="width: 150px; text-align: center;">Note</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -212,7 +212,7 @@
                         <div>
                             <div class="preview-label">Preview:</div>
                             <div class="logo-preview">
-                                <img id="headerLogoPreview" src="https://cdn-icons-png.flaticon.com/512/6415/6415824.png" alt="Header Logo Preview">
+                                <img id="headerLogoPreview" src="assets/logo.png" alt="Header Logo Preview">
                             </div>
                         </div>
                         <div style="font-size: 12px; color: #666;">
@@ -253,7 +253,7 @@
                         <div>
                             <div class="preview-label">Watermark Preview:</div>
                             <div class="logo-preview" style="background: #f0f0f0;">
-                                <img id="watermarkLogoPreview" src="https://cdn-icons-png.flaticon.com/512/10988/10988094.png" alt="Watermark Preview" style="opacity: 0.08;">
+                                <img id="watermarkLogoPreview" src="assets/watermark.png" alt="Watermark Preview" style="opacity: 0.08;">
                             </div>
                         </div>
                     </div>
@@ -381,18 +381,18 @@
     <div id="paymentModal" class="modal">
         <div class="modal-content" style="max-width: 700px;">
             <div class="modal-header">
-                <h3 class="modal-title">🚀 Upgrade to Premium</h3>
+                <h3 class="modal-title" style="color:#050E3C;">🚀 Upgrade to Premium</h3>
                 <button class="close-modal" id="closePaymentModal">&times;</button>
             </div>
 
             <!-- Trial Expired Alert -->
             <div style="background:#fff3cd;border:2px dashed #ffc107;border-radius:8px;padding:15px;margin-bottom:20px;text-align:center;">
                 <strong style="color:#d35400;font-size:16px;">⚠️ Free Trial Expired</strong><br>
-                <span style="color:#555;">You have used all <strong>5 free prescriptions</strong></span>
+                <span style="color:#555;">You have used all <strong>2 free prescriptions</strong></span>
             </div>
 
             <!-- Trial Extension Packages -->
-            <h3 style="text-align:center;color:#28a745;margin-bottom:10px;">
+            <h3 style="text-align:center;color:#28a745;margin-top:20px; margin-bottom:20px;">
                 🔄 Trial Extension Packages
             </h3>
 
@@ -406,38 +406,99 @@
                 <div class="package-card popular">
                     <div class="badge">Most Popular</div>
                     <div class="pkg-count">10 Prescriptions</div>
-                    <div class="pkg-price">BDT 200</div>
+                    <div class="pkg-price">BDT 150</div>
                     <div class="pkg-note">Regular OPD</div>
                 </div>
 
                 <div class="package-card">
                     <div class="pkg-count">15 Prescriptions</div>
-                    <div class="pkg-price">BDT 300</div>
+                    <div class="pkg-price">BDT 200</div>
                     <div class="pkg-note">Busy clinic</div>
                 </div>
 
                 <div class="package-card">
                     <div class="pkg-count">20 Prescriptions</div>
-                    <div class="pkg-price">BDT 400</div>
+                    <div class="pkg-price">BDT 300</div>
                     <div class="pkg-note">High patient load</div>
                 </div>
 
                 <div class="package-card">
-                    <div class="pkg-count">30 Prescriptions</div>
-                    <div class="pkg-price">BDT 500</div>
+                    <div class="pkg-count">25 Prescriptions</div>
+                    <div class="pkg-price">BDT 350</div>
                     <div class="pkg-note">Weekly OPD</div>
                 </div>
 
                 <div class="package-card best">
                     <div class="badge gold">Best Value</div>
-                    <div class="pkg-count">50 Prescriptions</div>
-                    <div class="pkg-price">BDT 700</div>
+                    <div class="pkg-count">30 Prescriptions</div>
+                    <div class="pkg-price">BDT 400</div>
                     <div class="pkg-note">Save more 💰</div>
                 </div>
             </div>
 
+            <!-- Trial Extension Packages -->
+            <h3 style="text-align:center;color:#28a745;margin-top:20px; margin-bottom:20px;">
+                💎 Subscription Packages
+            </h3>
+            
+            <!-- Monthly Subscription -->
+            <div class="package-card" style="margin-top:15px;border:3px solid #6A097D;border-radius:10px;padding:10px;background:#fef7ff;">
+                <h3 style="text-align:center;color:#6A097D;margin-bottom:5px;">
+                    🎁 Monthly Subscription
+                </h3>
+
+                <div style="text-align:center;font-size:25px;font-weight:bold;color:#0056b3;">
+                    BDT <strike style="color:#dc3545;">1000</strike> 500
+                </div>
+
+                <p style="text-align:center;color:#555;margin:10px 0;">
+                    Unlimited Prescriptions for 1 Month
+                </p>
+            </div>
+            <!-- Quarterly Subscription -->
+            <div class="package-card" style="margin-top:15px;border:3px solid #142F43;border-radius:10px;padding:10px;background:#f3faff;">
+                <h3 style="text-align:center;color:#142F43;margin-bottom:5px;">
+                    🎁 Quarterly Subscription
+                </h3>
+
+                <div style="text-align:center;font-size:25px;font-weight:bold;color:#0056b3;">
+                    BDT <strike style="color:#dc3545;">2000</strike> 1000
+                </div>
+
+                <p style="text-align:center;color:#555;margin:10px 0;">
+                    Unlimited Prescriptions for 3 Months
+                </p>
+            </div>
+            <!-- Half Yearly Subscription -->
+            <div class="package-card" style="margin-top:15px;border:3px solid #FF6C22;border-radius:10px;padding:10px;background:#fff8f4;">
+                <h3 style="text-align:center;color:#FF6C22;margin-bottom:5px;">
+                    🎁 Half Yearly Subscription
+                </h3>
+
+                <div style="text-align:center;font-size:25px;font-weight:bold;color:#0056b3;">
+                    BDT <strike style="color:#dc3545;">3000</strike> 1500
+                </div>
+
+                <p style="text-align:center;color:#555;margin:10px 0;">
+                    Unlimited Prescriptions for 6 Months
+                </p>
+            </div>
+            <!-- Yearly Subscription -->
+            <div class="package-card" style="margin-top:15px;border:3px solid #EB3678;border-radius:10px;padding:10px;background:#fff7fa;">
+                <h3 style="text-align:center;color:#EB3678;margin-bottom:5px;">
+                    🎁 Yearly Subscription
+                </h3>
+
+                <div style="text-align:center;font-size:25px;font-weight:bold;color:#0056b3;">
+                    BDT <strike style="color:#dc3545;">4000</strike> 2000
+                </div>
+
+                <p style="text-align:center;color:#555;margin:10px 0;">
+                    Unlimited Prescriptions for 1 Year
+                </p>
+            </div>
             <!-- Lifetime Premium -->
-            <div style="margin-top:25px;border:3px solid #28a745;border-radius:10px;padding:20px;background:#f6fffa;">
+            <div class="package-card" style="margin-top:25px;border:3px solid #28a745;border-radius:10px;padding:40px;background:#f6fffa;">
                 <h2 style="text-align:center;color:#28a745;margin-bottom:10px;">
                     🏆 Lifetime Premium
                 </h2>
@@ -447,7 +508,7 @@
                 </div>
 
                 <p style="text-align:center;color:#555;margin:10px 0;">
-                    One-time Payment • Unlimited Prescriptions • No Expiry
+                    • One-time Payment • Unlimited Prescriptions • No Expiry
                 </p>
             </div>
 
@@ -757,4 +818,3 @@
 </body>
 
 </html>
-

@@ -456,3 +456,163 @@ function formatDisplayDate(dateStr) {
     const [year, month, day] = dateStr.split('-');
     return `${day}-${month}-${year}`;
 }
+
+// ====== PDF EXPORT FUNCTIONS ======
+async function generateAndDownloadPDF(dataArray, filename = "prescription") {
+    try {
+        // Create print view
+        const defaultLogoUrl = "assets/logo.png";
+        const result = await StorageManager.get(['prescriptionSettings']);
+        const settings = result.prescriptionSettings || {};
+        
+        const printWindow = window.open("", "_blank");
+        if (!printWindow) {
+            showCustomAlert('Popup Blocked', 'Please allow popups to generate PDF.', 'error');
+            return;
+        }
+        
+        const docTitle = filename;
+        const htmlContent = createPrintDocumentHTML(dataArray, defaultLogoUrl, docTitle);
+        
+        printWindow.document.write(htmlContent);
+        printWindow.document.close();
+        
+        // Wait for content to load
+        printWindow.onload = function() {
+            // Add jsPDF and html2canvas libraries
+            const script1 = printWindow.document.createElement('script');
+            script1.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+            
+            const script2 = printWindow.document.createElement('script');
+            script2.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+            
+            printWindow.document.head.appendChild(script1);
+            printWindow.document.head.appendChild(script2);
+            
+            // Add download button
+            setTimeout(() => {
+                const container = printWindow.document.querySelector('.page-container');
+                if (container) {
+                    const downloadBtn = printWindow.document.createElement('button');
+                    downloadBtn.innerHTML = '📥 Download PDF';
+                    downloadBtn.style.cssText = `
+                        position: fixed;
+                        top: 70px;
+                        left: 10px;
+                        background: #28a745;
+                        color: white;
+                        border: none;
+                        padding: 10px 15px;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        z-index: 10000;
+                        font-weight: bold;
+                    `;
+                    downloadBtn.onclick = async function() {
+                        await downloadPageAsPDF(printWindow, filename);
+                    };
+                    printWindow.document.body.appendChild(downloadBtn);
+                    
+                    // Also add print button
+                    const printBtn = printWindow.document.querySelector('button[onclick*="print"]');
+                    if (printBtn) {
+                        printBtn.style.top = '10px';
+                    }
+                }
+            }, 1000);
+        };
+        
+    } catch (error) {
+        console.error('PDF generation error:', error);
+        showCustomAlert('Error', 'Failed to generate PDF.', 'error');
+    }
+}
+
+async function downloadPageAsPDF(printWindow, filename) {
+    try {
+        // Use html2canvas and jsPDF
+        const { jsPDF } = printWindow.jspdf;
+        
+        const element = printWindow.document.querySelector('.page-container');
+        if (!element) {
+            console.error('No page container found');
+            return;
+        }
+        
+        // Create canvas from HTML
+        const canvas = await printWindow.html2canvas(element, {
+            scale: 2,
+            useCORS: true,
+            logging: false
+        });
+        
+        // Create PDF
+        const imgWidth = 210; // A4 width in mm
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        
+        const pdf = new jsPDF({
+            orientation: imgHeight > imgWidth ? 'portrait' : 'landscape',
+            unit: 'mm',
+            format: 'a4'
+        });
+        
+        // Add image to PDF
+        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+        
+        // Download PDF
+        pdf.save(`${filename}.pdf`);
+        
+        showSuccessMessage('PDF Downloaded', 'Prescription downloaded successfully!');
+        
+    } catch (error) {
+        console.error('PDF download error:', error);
+        printWindow.alert('Failed to download PDF. Please try the print option instead.');
+    }
+}
+
+// Modify openPrintView to include download option
+function openPrintView(historyArray, defaultLogo, title) {
+    const win = window.open("", "_blank");
+    win.document.write(createPrintDocumentHTML(historyArray, defaultLogo, title));
+    win.document.close();
+    
+    // Add download button after load
+    win.onload = function() {
+        setTimeout(() => {
+            const container = win.document.querySelector('.page-container');
+            if (container) {
+                // Create download button container
+                const buttonContainer = win.document.querySelector('.no-print');
+                if (buttonContainer) {
+                    // Add download button
+                    const downloadBtn = win.document.createElement('button');
+                    downloadBtn.innerHTML = '📥 Download PDF';
+                    downloadBtn.style.cssText = `
+                        background: #28a745;
+                        color: white;
+                        border: none;
+                        padding: 5px 15px;
+                        border-radius: 3px;
+                        cursor: pointer;
+                        font-weight: bold;
+                        margin-right: 10px;
+                    `;
+                    downloadBtn.onclick = async function() {
+                        await downloadPageAsPDF(win, title);
+                    };
+                    
+                    // Insert before close button
+                    const closeBtn = buttonContainer.querySelector('button[onclick*="close"]');
+                    buttonContainer.insertBefore(downloadBtn, closeBtn);
+                }
+            }
+            
+            // Auto-print after 1 second (optional)
+            setTimeout(() => {
+                win.print();
+            }, 1000);
+            
+        }, 500);
+    };
+}

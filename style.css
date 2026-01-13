@@ -3,7 +3,17 @@
    Version: 12.3.1
    Organized by: Component Categories
    =================================================================== */
-
+/* ==================== GLOBAL COLOR THEME ==================== */
+:root {
+    --primary: #0d6efd;
+    --primary-soft: #eef4ff;
+    --success: #2fb344;
+    --danger: #fa5252;
+    --warning: #fab005;
+    --neutral-bg: #f8fafc;
+    --border-soft: #e5e7eb;
+    --text-main: #1f2937;
+}
 /* ==================== SECTION 0: BASE & LAYOUT STYLES ==================== */
 body { 
     font-family: 'Segoe UI', sans-serif; 
@@ -23,6 +33,7 @@ body {
 }
 
 .dashboard-title {
+    font-size: 18px; 
     color: #0056b3;
     margin: 0;
 }
@@ -59,7 +70,7 @@ body {
     display: flex; 
     flex-direction: column; 
     padding: 20px; 
-    overflow-y: auto; 
+    overflow-y: hidden; 
 }
 
 .history-sidebar {
@@ -119,6 +130,28 @@ body {
     background: #e0a800;
 }
 
+#subscriptionBtn {
+    background: #28a745;
+    color: white;
+}
+
+#subscriptionBtn:hover {
+    background: #218838;
+}
+
+/* For mobile responsive section, add this: */
+@media screen and (max-width: 480px) {
+    .header-container > div {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .header-btn {
+        flex: 1;
+        min-width: 100px;
+        margin: 2px;
+    }
+}
 /* ==================== SECTION 4: FORM ELEMENTS ==================== */
 .input-group { 
     border: 1px solid #e0e0e0; 
@@ -167,6 +200,34 @@ textarea {
 }
 
 /* ==================== SECTION 5: BUTTON STYLES ==================== */
+
+.btn-download {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.btn-download:hover {
+    background: #218838;
+}
+
+/* Update button container for 3 buttons */
+@media screen and (max-width: 768px) {
+    .button-container {
+        flex-direction: column !important;
+    }
+    
+    .button-container button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
 .btn-add { 
     background: #28a745; 
     color: white; 
@@ -211,6 +272,7 @@ textarea {
     font-size: 10px; 
     border-radius: 3px; 
     padding: 2px 8px; 
+	margin: 0;	
 }
 
 .btn-edit { 
@@ -395,13 +457,16 @@ textarea {
 .history-buttons {
     display: flex !important;
     flex-direction: row !important;
-    width: 95% !important;
-    gap: 17px;
+    width: 100% !important;  /* <-- Changed to 100% */
+    justify-content: space-between;  /* <-- Added to distribute buttons evenly */
+    gap: 0;  /* <-- Reset gap since we're using space-between */
 }
 
 .history-buttons button {
-    flex: 1;
+    flex: 0 0 auto;  /* <-- Don't allow buttons to grow/shrink */
     height: 25px;
+    width: calc(33.33% - 5px);  /* <-- Each button takes 1/3 of space minus small gap */
+    margin: 0 2.5px;  /* <-- Small margin between buttons */
 }
 
 .edit-mode-indicator {
@@ -621,7 +686,10 @@ textarea {
     margin-top: 20px; 
     padding-top: 15px; 
     border-top: 1px solid #eee; 
-    text-align: right; 
+    text-align: center; /* Changed from right to center */
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .btn-save-settings { 
@@ -644,7 +712,7 @@ textarea {
     cursor: pointer; 
     font-weight: bold; 
     font-size: 14px; 
-    margin-right: 10px; 
+    margin-right: 0; /* Removed margin-right since we're using gap */
 }
 
 .preview-label { 
@@ -1456,7 +1524,8 @@ input[list]::-webkit-calendar-picker-indicator {
     background: #EBF4DD; 
     color: white;
     border: none;
-    min-height: 20px; padding: 0 7px;
+    min-height: 20px; 
+    padding: 0 7px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
@@ -1494,6 +1563,7 @@ input[list]::-webkit-calendar-picker-indicator {
     align-content: right;
     flex: 1;
     min-width: 120px;
+    height: 28px; /* Added fixed height */
 }
 
 #loadPresetDropdown option[value=""] {
@@ -1559,7 +1629,8 @@ input[list]::-webkit-calendar-picker-indicator {
     background: #dc3545;
     color: white;
     border: none;
-    min-height: 20px; padding: 0 7px;
+    min-height: 20px; 
+    padding: 0 7px;
     border-radius: 3px;
     cursor: pointer;
     font-size: 10px;
@@ -1660,3 +1731,366 @@ input:disabled, select:disabled, textarea:disabled, button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+/* ===================================================================
+   MOBILE RESPONSIVE OVERRIDES (Add to the end of style.css)
+   Targeting tablets and mobile devices (< 992px)
+   =================================================================== */
+
+@media screen and (max-width: 992px) {
+
+    /* 1. RESET BODY LAYOUT FOR SCROLLING */
+    body {
+        /* Disable the fixed viewport height used on desktop */
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto; /* Allow natural vertical scrolling */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+        padding: 10px; /* Reduce outer padding on small screens */
+        display: block; /* Stop treating the whole body as a flex container */
+    }
+
+    /* 2. STACK MAIN CONTAINERS */
+    .dashboard-container {
+        /* Stack main form and sidebar vertically */
+        flex-direction: column;
+        gap: 15px;
+        height: auto;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .main-form,
+    .history-sidebar {
+        /* Make both take full width and let height adjust to content */
+        width: 100%;
+        flex: none;
+        height: auto;
+        max-height: none;
+        overflow: visible; /* Remove internal scrollbars */
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    /* 3. HEADER WITH CENTERED BUTTONS */
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    
+    .dashboard-title {
+        font-size: 20px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .header-container > div {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    /* 4. PATIENT INFO INPUTS - STACK VERTICALLY */
+    .header-row {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .header-row input,
+    .header-row select {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        padding: 10px;
+        box-sizing: border-box;
+        margin: 0 !important;
+    }
+
+    /* 5. CLINICAL & MEDICINE COLUMNS - STACK VERTICALLY */
+    .main-form > div[style*="display: flex; gap: 20px"] {
+        flex-direction: column !important;
+        gap: 15px !important;
+        width: 100%;
+    }
+
+    /* 6. PULSE/BP/TEMP INPUTS - SIDE BY SIDE */
+    .input-group > div[style*="display:flex; gap:5px"] {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+
+    #pulseInput, #bpInput, #tempInput {
+        flex: 1;
+        min-width: 0; /* Allow shrinking */
+        text-align: center;
+        padding: 8px 4px;
+    }
+
+    /* 7. MEDICINE TABLE - HORIZONTAL SCROLL */
+    #medicineTableContainer {
+        display: block !important;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 10px;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+
+    .med-table {
+        min-width: 800px; 
+    }
+    
+    .med-table select, 
+    .med-table input {
+        padding: 6px 4px;
+        font-size: 12px;
+    }
+
+    /* 8. MEDICINE BUTTONS - SMALLER HEIGHT */
+    #medicineTableContainer + div {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 8px !important;
+        align-items: center;
+    }
+    
+    #medicineTableContainer + div > button,
+    #medicineTableContainer + div > select {
+        padding: 6px 10px !important;
+        height: 32px !important;
+        font-size: 11px !important;
+        margin: 0 !important;
+        flex: 1 1 calc(50% - 4px);
+        box-sizing: border-box;
+        min-height: unset !important;
+    }
+    
+    .btn-preset {
+        height: 32px !important;
+        padding: 6px 10px !important;
+        min-height: unset !important;
+    }
+    
+    #loadPresetDropdown {
+        height: 32px !important;
+        padding: 0 8px !important;
+        font-size: 11px !important;
+    }
+
+    /* 9. SAVE/GENERATE BUTTONS - SIDE BY SIDE */
+	.button-container {
+		flex-direction: row !important;
+		gap: 10px !important;
+		margin-top: 15px !important;
+		width: 100%;
+		display: flex !important; /* Already added */
+	}
+
+	.btn-save,
+	.btn-gen {
+	    flex: 1; /* Already set */
+	    padding: 12px;
+	    font-size: 14px;
+	    min-height: 48px;
+	    box-sizing: border-box;
+	    width: auto !important; /* ADD THIS LINE - Force auto width */
+	}
+
+    /* 10. HISTORY SIDEBAR ADJUSTMENTS */
+    .history-sidebar {
+        border-top: 3px solid #0056b3;
+        padding-top: 15px;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    /* 11. MODAL ADJUSTMENTS FOR MOBILE */
+    .modal-content {
+        width: 95%;
+        max-width: 95%;
+        padding: 15px;
+        margin: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Stack settings columns vertically */
+    .settings-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .payment-card-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* 12. SETTINGS MODAL BUTTONS - CENTERED */
+    .modal-footer {
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    .modal-footer .btn-cancel,
+    .modal-footer .btn-save-settings {
+        margin: 0 5px;
+        min-width: 120px;
+    }
+
+    /* On very small screens, adjust the medicine buttons */
+	@media screen and (max-width: 480px) {
+		.header-container > div {
+			flex-direction: row; /* Changed from column to row */
+			flex-wrap: nowrap; /* Added to prevent wrapping */
+			justify-content: center; /* Center the buttons */
+		}
+		
+		.header-btn {
+			width: auto; /* Changed from 80% to auto */
+			flex: 0 1 auto; /* Allow natural width */
+			min-width: 80px; /* Keep minimum width */
+			margin-bottom: 0; /* Remove bottom margin */
+		}
+		
+		.input-group > div[style*="display:flex; gap:5px"] {
+			flex-wrap: wrap;
+		}
+		
+		#pulseInput, #bpInput, #tempInput {
+			flex: 1 1 30%;
+			min-width: 80px;
+		}
+		
+		.button-container {
+			flex-direction: row !important; /* Changed from column to row */
+			display: flex !important; /* Ensure it's displayed as flex */
+		}
+		
+		.btn-save,
+		.btn-gen {
+			width: auto; /* Changed from 100% to auto */
+			flex: 1; /* Allow equal distribution */
+		}
+		
+		#medicineTableContainer + div > button,
+		#medicineTableContainer + div > select {
+			flex: 1 1 100%;
+		}
+	}
+    
+    /* Fix any overflow issues */
+    * {
+        max-width: 100%;
+    }
+	
+	/* 13. CUSTOM ALERT MODAL - MOBILE OPTIMIZATION */
+    #customAlertModal .modal-content {
+        width: 90%;
+        max-width: 400px;
+        padding: 0;
+        margin: 10px;
+    }
+
+    #customAlertModal .modal-header {
+        padding: 15px 20px;
+    }
+
+    #customAlertModal .modal-title {
+        font-size: 18px;
+    }
+
+    #customAlertModal .modal-body {
+        padding: 20px;
+    }
+
+    #alertBigIcon {
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
+
+    #alertMessage {
+        font-size: 14px;
+        padding: 10px;
+        line-height: 1.4;
+    }
+
+    #customAlertModal .modal-footer {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #alertCancelBtn,
+    #alertConfirmBtn {
+        width: 100%;
+        padding: 12px;
+        margin: 0;
+        min-width: auto;
+    }
+
+    /* Make modal more touch-friendly */
+    #closeAlertModal {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        padding: 0;
+    }
+
+    /* Ensure modal is properly centered on mobile */
+    .modal {
+        align-items: flex-start;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        overflow-y: auto;
+    }
+
+    #customAlertModal {
+        align-items: center;
+    }
+
+    /* Additional optimization for very small screens */
+    @media screen and (max-width: 480px) {
+        #customAlertModal .modal-content {
+            width: 95%;
+            max-width: 350px;
+        }
+
+        #customAlertModal .modal-header {
+            padding: 12px 15px;
+        }
+
+        #customAlertModal .modal-title {
+            font-size: 16px;
+        }
+
+        #alertBigIcon {
+            font-size: 40px;
+        }
+
+        #alertMessage {
+            font-size: 13px;
+        }
+
+        #alertCancelBtn,
+        #alertConfirmBtn {
+            padding: 10px;
+            font-size: 14px;
+        }
+    }
+}
+
+
